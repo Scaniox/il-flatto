@@ -1,3 +1,4 @@
 (fp_lib_table
   (lib (name "footprints")(type "KiCad")(uri "C:/Users/alexl/projects/il-flatto/pcb/footprints.pretty")(options "")(descr ""))
+  (lib (name "no silk")(type "KiCad")(uri "${KIPRJMOD}/no silk.pretty")(options "")(descr ""))
 )

@@ -33,9 +33,9 @@
         "other_text_thickness": 0.15,
         "other_text_upright": false,
         "pads": {
-          "drill": 3.0,
-          "height": 6.0,
-          "width": 6.0
+          "drill": 0.0,
+          "height": 0.62,
+          "width": 0.56
         },
         "silk_line_width": 0.15,
         "silk_text_italic": false,
@@ -104,8 +104,8 @@
         "allow_microvias": false,
         "max_error": 0.005,
         "min_clearance": 0.0,
-        "min_copper_edge_clearance": 0.0,
-        "min_hole_clearance": 0.25,
+        "min_copper_edge_clearance": 0.19999999999999998,
+        "min_hole_clearance": 0.3,
         "min_hole_to_hole": 0.25,
         "min_microvia_diameter": 0.19999999999999998,
         "min_microvia_drill": 0.09999999999999999,
@@ -120,6 +120,7 @@
       },
       "track_widths": [
         0.0,
+        0.15,
         0.254,
         0.3556
       ],
@@ -381,10 +382,6 @@
         "microvia_drill": 0.1,
         "name": "power",
         "nets": [
-          "/externals/V_BAT",
-          "/internals/VBUS",
-          "/internals/V_BAT",
-          "Net-(IC2-Pad1)",
           "VBUS",
           "VDD"
         ],
@@ -407,13 +404,13 @@
       "idf": "",
       "netlist": "",
       "specctra_dsn": "",
-      "step": "",
+      "step": "../3d/bottom.step",
       "vrml": ""
     },
     "page_layout_descr_file": ""
   },
   "schematic": {
-    "annotate_start_num": 0,
+    "annotate_start_num": 199,
     "drawing": {
       "default_line_thickness": 6.0,
       "default_text_size": 50.0,
@@ -462,6 +459,38 @@
     [
       "5be41b52-3df7-4277-93a2-9cdd3504fb4c",
       "externals"
+    ],
+    [
+      "f36c8e7b-5072-4363-8737-e72041c2897e",
+      "Row1"
+    ],
+    [
+      "c613c4d4-ce54-4237-9526-7c2ee4074dc6",
+      "Row2"
+    ],
+    [
+      "6b1e3fd1-c4e0-4aec-b7fb-0166d509591b",
+      "Row3"
+    ],
+    [
+      "3c264bf8-9712-49f9-9dc5-8313464a9016",
+      "Row4"
+    ],
+    [
+      "13e3f076-238c-4a31-89cd-20418da7f621",
+      "Row5"
+    ],
+    [
+      "9e9b2b0f-41eb-47bf-8d70-154949d85136",
+      "Row6"
+    ],
+    [
+      "d75400bf-8633-4e53-81a7-7e5dafa3e6c8",
+      "Row7"
+    ],
+    [
+      "7b9a70a7-0839-46ad-81f0-81ac44b7bd01",
+      "Row8"
     ]
   ],
   "text_variables": {}

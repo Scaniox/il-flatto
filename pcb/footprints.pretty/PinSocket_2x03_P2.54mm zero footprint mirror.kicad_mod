@@ -41,8 +41,33 @@
   (pad "4" thru_hole oval (at 0.14 2.54) (size 1.7 1.7) (drill 1.15) (layers *.Cu *.Mask) (tstamp f6ab1688-7fa0-427b-90ee-7dae9711946c))
   (pad "5" thru_hole oval (at -2.4 5.08) (size 1.7 1.7) (drill 1.15) (layers *.Cu *.Mask) (tstamp db450838-c8c9-40c5-96c2-a3396a1f7fda))
   (pad "6" thru_hole oval (at 0.14 5.08) (size 1.7 1.7) (drill 1.15) (layers *.Cu *.Mask) (tstamp 17ae96fa-72b7-466c-9247-4ba7b4f7b842))
-  (model "${KICAD6_3DMODEL_DIR}/Connector_PinSocket_2.54mm.3dshapes/PinSocket_2x03_P2.54mm_Vertical.wrl"
-    (offset (xyz 0 0 0))
+  (model "C:/Users/alexl/projects/il-flatto/pcb/parts/Mill-Max 0531-0-15-15-31-27-10-0/Mill-Max 0531-0-15-15-31-27-10-0 v1.step"
+    (offset (xyz 0.15 0 0))
+    (scale (xyz 1 1 1))
+    (rotate (xyz 0 0 0))
+  )
+  (model "C:/Users/alexl/projects/il-flatto/pcb/parts/Mill-Max 0531-0-15-15-31-27-10-0/Mill-Max 0531-0-15-15-31-27-10-0 v1.step"
+    (offset (xyz 0.15 -2.54 0))
+    (scale (xyz 1 1 1))
+    (rotate (xyz 0 0 0))
+  )
+  (model "C:/Users/alexl/projects/il-flatto/pcb/parts/Mill-Max 0531-0-15-15-31-27-10-0/Mill-Max 0531-0-15-15-31-27-10-0 v1.step"
+    (offset (xyz 0.15 -5.08 0))
+    (scale (xyz 1 1 1))
+    (rotate (xyz 0 0 0))
+  )
+  (model "C:/Users/alexl/projects/il-flatto/pcb/parts/Mill-Max 0531-0-15-15-31-27-10-0/Mill-Max 0531-0-15-15-31-27-10-0 v1.step"
+    (offset (xyz -2.4 0 0))
+    (scale (xyz 1 1 1))
+    (rotate (xyz 0 0 0))
+  )
+  (model "C:/Users/alexl/projects/il-flatto/pcb/parts/Mill-Max 0531-0-15-15-31-27-10-0/Mill-Max 0531-0-15-15-31-27-10-0 v1.step"
+    (offset (xyz -2.4 -2.54 0))
+    (scale (xyz 1 1 1))
+    (rotate (xyz 0 0 0))
+  )
+  (model "C:/Users/alexl/projects/il-flatto/pcb/parts/Mill-Max 0531-0-15-15-31-27-10-0/Mill-Max 0531-0-15-15-31-27-10-0 v1.step"
+    (offset (xyz -2.4 -5.08 0))
     (scale (xyz 1 1 1))
     (rotate (xyz 0 0 0))
   )

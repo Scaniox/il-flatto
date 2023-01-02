@@ -1,4 +1,4 @@
-20618306706203932
+20635031470771143
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -86485,12 +86485,47 @@ varistor
 2
 2
 footprints
+CAS-D20TB
+
+
+0
+6
+6
+footprints
+CS-4-12XA
+
+
+0
+3
+3
+footprints
+CVS-02TB
+
+
+0
+4
+4
+footprints
+CVS-02TB mirrored
+
+
+0
+4
+4
+footprints
 EG1218
 
 
 0
 3
 3
+footprints
+GCT_USB4110-GF-A_REVB
+
+
+0
+16
+16
 footprints
 NCV8605MN33T2G
 
@@ -86534,12 +86569,33 @@ Through hole socket strip THT 2x05 2.54mm double row
 10
 10
 footprints
+SMD-LX0707RGB-TR
+
+
+0
+4
+4
+footprints
 SW_CAS-D20TA
 
 
 0
 6
 6
+footprints
+SW_TL3780AF240QG
+
+
+0
+2
+2
+footprints
+TL3365_button
+
+
+0
+4
+2
 footprints
 bottom outer
 
@@ -86575,3 +86631,17 @@ top outer
 0
 0
 0
+no silk
+CP_Radial_D5.0mm_P2.00mm no silk
+CP, Radial series, Radial, pin pitch=2.00mm, , diameter=5mm, Electrolytic Capacitor
+CP Radial series Radial pin pitch 2.00mm  diameter 5mm Electrolytic Capacitor
+0
+2
+2
+no silk
+PinSocket_2x05_P2.54mm zero footprint mirror no silk
+Through hole straight socket strip, 2x05, 2.54mm pitch, double cols (from Kicad 4.0.7), script generated
+Through hole socket strip THT 2x05 2.54mm double row
+0
+10
+10

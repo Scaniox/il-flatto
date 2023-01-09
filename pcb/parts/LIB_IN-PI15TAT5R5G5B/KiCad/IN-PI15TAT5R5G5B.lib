@@ -1,0 +1,29 @@
+EESchema-LIBRARY Version 2.3
+#encoding utf-8
+#SamacSys ECAD Model IN-PI15TAT5R5G5B
+#/14938171/809769/2.49/4/3/LED
+DEF IN-PI15TAT5R5G5B LED 0 30 Y Y 1 F N
+F0 "LED" 950 300 50 H V L CNN
+F1 "IN-PI15TAT5R5G5B" 950 200 50 H V L CNN
+F2 "INPI15TAT5R5G5B" 950 100 50 H I L CNN
+F3 "https://www.mouser.com/datasheet/2/180/IN_PI15TAT5R5G5B_v1_0-2257998.pdf" 950 0 50 H I L CNN
+F4 "TOP MOUNT / 1515 / 1.5 X 1.5 X 0" 950 -100 50 H I L CNN "Description"
+F5 "0.75" 950 -200 50 H I L CNN "Height"
+F6 "Inolux" 950 -300 50 H I L CNN "Manufacturer_Name"
+F7 "IN-PI15TAT5R5G5B" 950 -400 50 H I L CNN "Manufacturer_Part_Number"
+F8 "743-IN-PI15TAT5R5G5B" 950 -500 50 H I L CNN "Mouser Part Number"
+F9 "https://www.mouser.co.uk/ProductDetail/Inolux/IN-PI15TAT5R5G5B?qs=stqOd1AaK79AxVQMebgHsw%3D%3D" 950 -600 50 H I L CNN "Mouser Price/Stock"
+F10 "IN-PI15TAT5R5G5B" 950 -700 50 H I L CNN "Arrow Part Number"
+F11 "https://www.arrow.com/en/products/in-pi15tat5r5g5b/inolux-corporation?region=nac" 950 -800 50 H I L CNN "Arrow Price/Stock"
+F12 "" 950 -900 50 H I L CNN "Mouser Testing Part Number"
+F13 "" 950 -1000 50 H I L CNN "Mouser Testing Price/Stock"
+DRAW
+X DIN 1 0 -100 200 R 50 50 0 0 P
+X VDD 2 1100 -100 200 L 50 50 0 0 P
+X DOUT 3 1100 0 200 L 50 50 0 0 P
+X GND 4 0 0 200 R 50 50 0 0 P
+P 5 0 1 6 200 100 900 100 900 -200 200 -200 200 100 N
+ENDDRAW
+ENDDEF
+#
+#End Library

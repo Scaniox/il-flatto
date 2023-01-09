@@ -1,4 +1,4 @@
-20635031470771143
+20638377846556283
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -86527,6 +86527,13 @@ GCT_USB4110-GF-A_REVB
 16
 16
 footprints
+INPI15TAT5R5G5B
+IN-PI15TAT5R5G5B-1
+LED
+0
+4
+4
+footprints
 NCV8605MN33T2G
 
 
@@ -86605,6 +86612,13 @@ bottom outer
 0
 footprints
 micros
+
+
+0
+0
+0
+footprints
+mouse-bite-3mm-slot
 
 
 0

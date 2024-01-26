@@ -1,5 +1,5 @@
-# MMCU = atmega1284p
-MMCU = atmega644p
+MMCU = atmega1284p
+# MMCU = atmega644p
 
 assemble:
 	avr-as -mmcu=$(MMCU) blink_asm.asm -o blink_asm.o

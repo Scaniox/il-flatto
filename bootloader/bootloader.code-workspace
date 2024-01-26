@@ -24,6 +24,7 @@
 			"Git Bash": {
 				"source": "Git Bash",
 			}
-		}
+		},
+		"editor.tabSize": 8
 	}
 }

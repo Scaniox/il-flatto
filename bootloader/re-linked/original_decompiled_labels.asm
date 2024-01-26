@@ -61,6 +61,7 @@
     f878:	rjmp	NO_ISR
     f87a:	nop
 
+    USB_DESC:
     f87c:	.word	0x0304	; type 03 legnth 4
     f87e:	.word	0x0409	; lang: eng
     f880:	.word	0x031c	; type 03 length 1c
@@ -940,6 +941,6 @@
 
     WHILE1_END:	cli
     fffc:	rjmp	fffc
-    fffe:	.word	0xff5a	; ????
+;     fffe:	.word	0xff5a	; ????
 
 

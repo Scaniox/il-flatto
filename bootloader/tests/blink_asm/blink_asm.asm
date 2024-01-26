@@ -1,12 +1,19 @@
+; can be used to spot if the reset vector is where it is expected to be
+
+.org 0x1F700
+	jmp TRAP
+
+.org 0x1F800
 RESET:
 	ldi r24, 0x11
 	sts 0x24, r24 ; ddrb = 0x11
+	sts 0x25, r24 ; portb = 0x11
 
 STOP:
 	rjmp STOP
 
 
-LOOP:
+TRAP:
 	lds r24, 0x25
 	com r24
 	sts 0x25, r24 ; portb = !portB
@@ -25,9 +32,8 @@ WAIT1:
 	subi r26, 1
 	BRNE WAIT1
 	
-	
 
-	rjmp LOOP
+	rjmp TRAP
 
 	
 

@@ -122,11 +122,11 @@ f8da:	ldi	r17, 0x01	; 1
 	; in	r24, RAMPZ
 	; out 	0x02, r24
 
-f8d0:	out	0x3f, r1	; SREG = 0
+f8d0:	out	SREG, r1	; SREG = 0
 f8d2:	ldi	r28, 0xFF	; Y = 0x10FF
 f8d4:	ldi	r29, 0x10	; 
-f8d6:	out	0x3e, r29	; SP = 0x10FF
-f8d8:	out	0x3d, r28	; 
+f8d6:	out	SPH, r29	; SP = 0x10FF
+f8d8:	out	SPL, r28	; 
 
 ;	store 0xffa5 into ram 0x0101:0x0100
 f8dc:	ldi	r26, 0x00	; X = 0x0100
@@ -188,20 +188,20 @@ f936:	ret
 
 ; isr for int2
 INT2_ISR:	push	r28
-f93a:	in	r28, 0x3f	;
+f93a:	in	r28, SREG	;
 f93c:	push	r28		; SREG onto stack
 f93e:	inc	r28		;
-f940:	sbis	0x03, 3	; 3
+f940:	sbis	PINB, 3	; 3
 f942:	brne	f93e
-f944:	sbis	0x03, 3	; 3
+f944:	sbis	PINB, 3	; 3
 f946:	rjmp	f95a
-f948:	sbis	0x03, 3	; 3
+f948:	sbis	PINB, 3	; 3
 f94a:	rjmp	f95a
-f94c:	sbis	0x03, 3	; 3
+f94c:	sbis	PINB, 3	; 3
 f94e:	rjmp	f95a
-f950:	sbis	0x03, 3	; 3
+f950:	sbis	PINB, 3	; 3
 f952:	rjmp	f95a
-f954:	sbis	0x03, 3	; 3
+f954:	sbis	PINB, 3	; 3
 f956:	rjmp	f95a
 f958:	rjmp	fa9c
 f95a:	push	r29
@@ -209,20 +209,20 @@ f95c:	lds	r28, 0x011A	;  0x80011a
 f960:	eor	r29, r29
 f962:	subi	r28, 0xDF	; 223
 f964:	sbci	r29, 0xFE	; 254
-f966:	sbis	0x03, 3	; 3
+f966:	sbis	PINB, 3	; 3
 f968:	rjmp	f96e
 f96a:	pop	r29
 f96c:	rjmp	f944
 f96e:	push	r18
 f970:	push	r16
 f972:	push	r17
-f974:	in	r16, 0x03	; 3
+f974:	in	r16, PINB	; 3
 f976:	ldi	r18, 0xFF	; 255
 f978:	bst	r16, 3
 f97a:	bld	r18, 0
 f97c:	push	r20
 f97e:	push	r19
-f980:	in	r17, 0x03	; 3
+f980:	in	r17, PINB	; 3
 f982:	ldi	r20, 0xFF	; 255
 f984:	eor	r16, r17
 f986:	bst	r16, 3
@@ -231,46 +231,46 @@ f98a:	ldi	r19, 0x0B	; 11
 f98c:	rjmp	f9f0
 f98e:	andi	r20, 0xFE	; 254
 f990:	mov	r16, r17
-f992:	in	r17, 0x03	; 3
+f992:	in	r17, PINB	; 3
 f994:	ori	r18, 0x01	; 1
 f996:	rjmp	f9e8
 f998:	mov	r17, r16
 f99a:	andi	r20, 0xFD	; 253
 f99c:	ori	r18, 0x02	; 2
 f99e:	nop
-f9a0:	in	r16, 0x03	; 3
+f9a0:	in	r16, PINB	; 3
 f9a2:	rjmp	f9f6
 f9a4:	andi	r20, 0xFB	; 251
 f9a6:	ori	r18, 0x04	; 4
 f9a8:	mov	r16, r17
 f9aa:	nop
-f9ac:	in	r17, 0x03	; 3
+f9ac:	in	r17, PINB	; 3
 f9ae:	rjmp	fa06
-f9b0:	in	r17, 0x03	; 3
+f9b0:	in	r17, PINB	; 3
 f9b2:	andi	r20, 0xF7	; 247
 f9b4:	ori	r18, 0x08	; 8
 f9b6:	rjmp	fa0c
 f9b8:	andi	r20, 0xEF	; 239
-f9ba:	in	r16, 0x03	; 3
+f9ba:	in	r16, PINB	; 3
 f9bc:	ori	r18, 0x10	; 16
 f9be:	rjmp	fa18
 f9c0:	andi	r20, 0xDF	; 223
-f9c2:	in	r17, 0x03	; 3
+f9c2:	in	r17, PINB	; 3
 f9c4:	ori	r18, 0x20	; 32
 f9c6:	rjmp	fa26
 f9c8:	andi	r20, 0xBF	; 191
-f9ca:	in	r16, 0x03	; 3
+f9ca:	in	r16, PINB	; 3
 f9cc:	ori	r18, 0x40	; 64
 f9ce:	rjmp	fa34
 f9d0:	eor	r20, r18
-f9d2:	in	r16, 0x03	; 3
+f9d2:	in	r16, PINB	; 3
 f9d4:	st	Y+, r20
 f9d6:	ldi	r20, 0xFF	; 255
 f9d8:	nop
 f9da:	eor	r17, r16
 f9dc:	bst	r17, 3
 f9de:	bld	r18, 0
-f9e0:	in	r17, 0x03	; 3
+f9e0:	in	r17, PINB	; 3
 f9e2:	andi	r17, 0x0C	; 12
 f9e4:	breq	fa58
 f9e6:	andi	r18, 0xF9	; 249
@@ -278,7 +278,7 @@ f9e8:	breq	f98e
 f9ea:	eor	r16, r17
 f9ec:	bst	r16, 3
 f9ee:	bld	r18, 1
-f9f0:	in	r16, 0x03	; 3
+f9f0:	in	r16, PINB	; 3
 f9f2:	andi	r18, 0xF3	; 243
 f9f4:	breq	f998
 f9f6:	subi	r19, 0x01	; 1
@@ -286,7 +286,7 @@ f9f8:	brcs	fa50
 f9fa:	eor	r17, r16
 f9fc:	bst	r17, 3
 f9fe:	bld	r18, 2
-fa00:	in	r17, 0x03	; 3
+fa00:	in	r17, PINB	; 3
 fa02:	andi	r18, 0xE7	; 231
 fa04:	breq	f9a4
 fa06:	eor	r16, r17
@@ -294,28 +294,28 @@ fa08:	bst	r16, 3
 fa0a:	bld	r18, 3
 fa0c:	andi	r18, 0xCF	; 207
 fa0e:	breq	f9b0
-fa10:	in	r16, 0x03	; 3
+fa10:	in	r16, PINB	; 3
 fa12:	eor	r17, r16
 fa14:	bst	r17, 3
 fa16:	bld	r18, 4
 fa18:	andi	r18, 0x9F	; 159
 fa1a:	breq	f9b8
 fa1c:	rjmp	fa1e
-fa1e:	in	r17, 0x03	; 3
+fa1e:	in	r17, PINB	; 3
 fa20:	eor	r16, r17
 fa22:	bst	r16, 3
 fa24:	bld	r18, 5
 fa26:	andi	r18, 0x3F	; 63
 fa28:	breq	f9c0
 fa2a:	rjmp	fa2c
-fa2c:	in	r16, 0x03	; 3
+fa2c:	in	r16, PINB	; 3
 fa2e:	eor	r17, r16
 fa30:	bst	r17, 3
 fa32:	bld	r18, 6
 fa34:	cpi	r18, 0x02	; 2
 fa36:	brcs	f9c8
 fa38:	rjmp	fa3a
-fa3a:	in	r17, 0x03	; 3
+fa3a:	in	r17, PINB	; 3
 fa3c:	eor	r16, r17
 fa3e:	bst	r16, 3
 fa40:	bld	r18, 7
@@ -323,11 +323,11 @@ fa42:	cpi	r18, 0x04	; 4
 fa44:	brcc	f9d0
 fa46:	andi	r20, 0x7F	; 127
 fa48:	ori	r18, 0x80	; 128
-fa4a:	in	r17, 0x03	; 3
+fa4a:	in	r17, PINB	; 3
 fa4c:	nop
 fa4e:	rjmp	fa42
 fa50:	ldi	r17, 0x04	; 4
-fa52:	out	0x1c, r17	; 28
+fa52:	out	EIFR, r17	; 28
 fa54:	eor	r16, r16
 fa56:	rjmp	fa86
 fa58:	subi	r19, 0x0B	; 11
@@ -335,7 +335,7 @@ fa5a:	neg	r19
 fa5c:	sub	r28, r19
 fa5e:	sbci	r29, 0x00	; 0
 fa60:	ldi	r17, 0x04	; 4
-fa62:	out	0x1c, r17	; 28
+fa62:	out	EIFR, r17	; 28
 fa64:	ld	r16, Y
 fa66:	cpi	r16, 0xC3	; 195
 fa68:	breq	faa4
@@ -359,11 +359,11 @@ fa8e:	pop	r17
 fa90:	pop	r16
 fa92:	pop	r18
 fa94:	pop	r29
-fa96:	in	r28, 0x1c	; 28
+fa96:	in	r28, EIFR	; 28
 fa98:	sbrc	r28, 2
 fa9a:	rjmp	f93e
 fa9c:	pop	r28
-fa9e:	out	0x3f, r28	; 63
+fa9e:	out	SREG, r28	; 63
 faa0:	pop	r28
 faa2:	reti
 
@@ -409,17 +409,17 @@ fb00:	mov	r20, r19
 fb02:	ldi	r28, 0x14	; 20
 fb04:	ldi	r29, 0x00	; 0
 fb06:	ldi	r19, 0x02	; 2
-fb08:	in	r17, 0x04	; 4
+fb08:	in	r17, DDRB	; 4
 fb0a:	ori	r17, 0x0C	; 12
-fb0c:	sbi	0x05, 3	; 5
-fb0e:	out	0x04, r17	; 4
-fb10:	in	r16, 0x05	; 5
+fb0c:	sbi	PORTB, 3	; 5
+fb0e:	out	DDRB, r17	; 4
+fb10:	in	r16, PORTB	; 5
 fb12:	ldi	r18, 0x40	; 64
 fb14:	ldi	r17, 0x0C	; 12
 fb16:	push	r21
 fb18:	eor	r16, r17
 fb1a:	ldi	r21, 0x06	; 6
-fb1c:	out	0x05, r16	; 5
+fb1c:	out	PORTB, r16	; 5
 fb1e:	ror	r18
 fb20:	brcc	fb2a
 fb22:	subi	r21, 0x01	; 1
@@ -430,7 +430,7 @@ fb2a:	eor	r16, r17
 fb2c:	ldi	r21, 0x06	; 6
 fb2e:	nop
 fb30:	subi	r19, 0xAB	; 171
-fb32:	out	0x05, r16	; 5
+fb32:	out	PORTB, r16	; 5
 fb34:	brcs	faea
 fb36:	ror	r18
 fb38:	brcc	fb44
@@ -442,7 +442,7 @@ fb42:	rjmp	fb36
 fb44:	eor	r16, r17
 fb46:	ldi	r21, 0x06	; 6
 fb48:	ror	r18
-fb4a:	out	0x05, r16	; 5
+fb4a:	out	PORTB, r16	; 5
 fb4c:	brcc	fb56
 fb4e:	subi	r21, 0x01	; 1
 fb50:	brne	fb5a
@@ -452,54 +452,54 @@ fb56:	eor	r16, r17
 fb58:	ldi	r21, 0x06	; 6
 fb5a:	ld	r18, Y+
 fb5c:	and	r19, r19
-fb5e:	out	0x05, r16	; 5
+fb5e:	out	PORTB, r16	; 5
 fb60:	brne	faea
 fb62:	andi	r16, 0xF3	; 243
 fb64:	lds	r17, 0x011E	; usbNewDeviceAddr  0x80011e
 fb68:	add	r17, r17
 fb6a:	subi	r28, 0x16	; 22
 fb6c:	sbci	r29, 0x00	; 0
-fb6e:	out	0x05, r16	; 5
+fb6e:	out	PORTB, r16	; 5
 fb70:	breq	fb76
 fb72:	sts	0x0118, r17	; usbDeviceAddr  0x800118
 fb76:	ldi	r17, 0x04	; 4
-fb78:	out	0x1c, r17	; 28
+fb78:	out	EIFR, r17	; 28
 fb7a:	ori	r16, 0x08	; 8
-fb7c:	in	r17, 0x04	; 4
+fb7c:	in	r17, DDRB	; 4
 fb7e:	andi	r17, 0xF3	; 243
 fb80:	mov	r20, r16
 fb82:	andi	r20, 0xF3	; 243
 fb84:	pop	r21
 fb86:	rjmp	fb88
 fb88:	rjmp	fb8a
-fb8a:	out	0x05, r16	; 5
-fb8c:	out	0x04, r17	; 4
-fb8e:	out	0x05, r20	; 5
+fb8a:	out	PORTB, r16	; 5
+fb8c:	out	DDRB, r17	; 4
+fb8e:	out	PORTB, r20	; 5
 fb90:	rjmp	fa8a
 
 
-CHECK_BUTTON:	in	r24, 0x34	; read MCUSR
+CHECK_BUTTON:	in	r24, MCUSR	; read MCUSR
 fb94:	andi	r24, 0x0A	; is WDRF or EXTRF set?
 fb96:	brne	YES_BTLD	; yes bootloader
 fb98:	rjmp	NO_BTLD		; no bootloader
 
 
-YES_BTLD:	out	0x34, r1	; reset MCUSR
+YES_BTLD:	out	MCUSR, r1	; reset MCUSR
 fb9c:	ldi	r24, 0x18	; 24
-fb9e:	in	r0, 0x3f	; r0 = 
+fb9e:	in	r0, SREG	; r0 = 
 fba0:	cli
 fba2:	sts	0x0060, r24	;  0x800060
 fba6:	sts	0x0060, r1	;  0x800060
-fbaa:	out	0x3f, r0	; 63
+fbaa:	out	SREG, r0	; 63
 fbac:	ldi	r24, 0x01	; 1
-fbae:	out	0x35, r24	; 53
+fbae:	out	MCUCR, r24	; 53
 fbb0:	ldi	r24, 0x02	; 2
-fbb2:	out	0x35, r24	; 53
+fbb2:	out	MCUCR, r24	; 53
 fbb4:	lds	r24, 0x0069	;  0x800069
 fbb8:	ori	r24, 0x30	; 48
 fbba:	sts	0x0069, r24	;  0x800069
-fbbe:	sbi	0x1d, 2	; 29
-fbc0:	sbi	0x04, 3	; 4
+fbbe:	sbi	EIMSK, 2	; 29
+fbc0:	sbi	DDRB, 3	; 4
 fbc2:	ldi	r18, 0x00	; 0
 fbc4:	rjmp	fbce
 ;	startup delay
@@ -510,16 +510,16 @@ fbcc:	brne	fbca
 fbce:	subi	r18, 0x01	; 1
 fbd0:	brne	fbc6
 ;	more setup
-fbd2:	cbi	0x04, 3	; 4
+fbd2:	cbi	DDRB, 3	; 4
 fbd4:	sei
-fbd6:	sbi	0x04, 7	; DDRB7 = 1
-fbd8:	sbi	0x05, 7	; PORTB7 = 1
+fbd6:	sbi	DDRB, 7	; DDRB7 = 1
+fbd8:	sbi	PORTB, 7	; PORTB7 = 1
 fbda:	eor	r12, r12
 fbdc:	eor	r13, r13
 
 MAIN_LOOP:	lds	r25, 0x011D	; usbRxLen  0x80011d
-	sbi	0x05, 7	
-	cbi	0x05, 7	
+	sbi	PORTB, 7	
+	cbi	PORTB, 7	
 fbe2:	subi	r25, 0x03	; 3
 fbe4:	sbrc	r25, 7
 fbe6:	rjmp	skip_rx		; 
@@ -780,7 +780,7 @@ fe28:	ldi	r24, 0x03	; 3
 fe2a:	sts	0x0057, r24	;  0x800057
 fe2e:	spm
 fe30:	sei
-fe32:	in	r0, 0x37	; 55
+fe32:	in	r0, SPMCSR	; 55
 fe34:	sbrc	r0, 0
 fe36:	rjmp	fe32
 fe38:	subi	r19, 0xFE	; 254
@@ -813,7 +813,7 @@ fe74:	ldi	r24, 0x05	; 5
 fe76:	sts	0x0057, r24	;  0x800057
 fe7a:	spm
 fe7c:	sei
-fe7e:	in	r0, 0x37	; 55
+fe7e:	in	r0, SPMCSR	; 55
 fe80:	sbrc	r0, 0
 fe82:	rjmp	fe7e
 fe84:	cli
@@ -931,7 +931,7 @@ ff88:	sts	0x0100, r22	; usbTxLen  0x800100
 
 
 waitForSE0:	ldi	r25, 0x14	; wait for SE0 to end (End of packet)
-ff8e:	in	r24, 0x03	; 3
+ff8e:	in	r24, PINB	; 3
 ff90:	andi	r24, 0x0C	; 12
 ff92:	brne	ffa0
 ff94:	subi	r25, 0x01	; 1
@@ -951,41 +951,41 @@ ffb0:	dec	r13
 ffb2:	breq	end_btld	; r12==r13==0 - escape main loop
 ffb4:	rjmp	MAIN_LOOP
 
-end_btld:	cbi	0x05, 7	; 5
-ffb8:	cbi	0x04, 7	; 4
+end_btld:	cbi	PORTB, 7	; 5
+ffb8:	cbi	DDRB, 7	; 4
 ffba:	cli
-ffbc:	out	0x1d, r1	; 29
+ffbc:	out	EIMSK, r1	; 29
 ffbe:	sts	0x0069, r1	;  0x800069
 ffc2:	ldi	r24, 0x01	; 1
-ffc4:	out	0x35, r24	; 53
-ffc6:	out	0x35, r1	; 53
+ffc4:	out	MCUCR, r24	; 53
+ffc6:	out	MCUCR, r1	; 53
 
 NO_BTLD:	jmp	0	;  0x0
 ffcc:	ret
 
 
-ffce:	sbic	0x1f, 1	; 31
+ffce:	sbic	EECR, 1	; 31
 ffd0:	rjmp	ffce
-ffd2:	out	0x22, r25	; 34
-ffd4:	out	0x21, r24	; 33
-ffd6:	sbi	0x1f, 0	; 31
+ffd2:	out	EEARH, r25	; 34
+ffd4:	out	EEARL, r24	; 33
+ffd6:	sbi	EECR, 0	; 31
 ffd8:	eor	r25, r25
-ffda:	in	r24, 0x20	; 32
+ffda:	in	r24, EEDR	; 32
 ffdc:	ret
 
 
 ffde:	mov	r18, r22
-ffe0:	sbic	0x1f, 1	; 31
+ffe0:	sbic	EECR, 1	; 31
 ffe2:	rjmp	ffe0
-ffe4:	out	0x1f, r1	; 31
-ffe6:	out	0x22, r25	; 34
-ffe8:	out	0x21, r24	; 33
-ffea:	out	0x20, r18	; 32
-ffec:	in	r0, 0x3f	; 63
+ffe4:	out	EECR, r1	; 31
+ffe6:	out	EEARH, r25	; 34
+ffe8:	out	EEARL, r24	; 33
+ffea:	out	EEDR, r18	; 32
+ffec:	in	r0, SREG	; 63
 ffee:	cli
-fff0:	sbi	0x1f, 2	; 31
-fff2:	sbi	0x1f, 1	; 31
-fff4:	out	0x3f, r0	; 63
+fff0:	sbi	EECR, 2	; 31
+fff2:	sbi	EECR, 1	; 31
+fff4:	out	SREG, r0	; 63
 fff6:	adiw	r24, 0x01	; 1
 fff8:	ret
 

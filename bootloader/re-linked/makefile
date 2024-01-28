@@ -19,6 +19,10 @@ assemble: recompiled.hex
 upload: recompiled.hex
 	avrdude -c um232h -p $(MMCU) -v -U flash:w:"C:\Users\alexl\projects\il-flatto\bootloader\re-linked\recompiled.hex":i 
 
+test: upload
+	sleep 1
+	avrdude -c usbasp -p m644p -v -U flash:w:"C:\Users\alexl\projects\il-flatto\bootloader\tests\blink\blink.hex":i 
+
 disassemble:
 	avr-objdump  -m avr5 -D ORIGINAL_atmega644pa-12mhz_2048.hex > original_decompiled.dump
 

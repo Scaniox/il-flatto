@@ -1,10 +1,9 @@
 # RE-LINKED MAKEFILE
 
 CC = avr-gcc
-ASSEMBLER = "C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avrassembler\avrasm2.exe"
 
-MMCU = atmega1284p
-# MMCU = atmega644p
+# MMCU = atmega1284p
+MMCU = atmega644p
 
 recompiled.o: original_decompiled_labels.asm
 	avr-as -mmcu=$(MMCU) original_decompiled_labels.asm -o recompiled.o

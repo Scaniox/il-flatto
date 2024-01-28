@@ -1,114 +1,4 @@
-; .include "atmega1284pdef.inc"
-.org 0xF800
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-
-.word	0x0304	; type 03 legnth 4
-.word	0x0409	; lang: eng
-.word	0x031c	; type 03 length 1c
-.word	0x0076	; w
-.word	0x0077	; w
-.word	0x0077	; w
-.word	0x002e	; .
-.word	0x0066	; f
-.word	0x0069	; i
-.word	0x0073	; s
-.word	0x0063	; c
-.word	0x0068	; h
-.word	0x006c	; l
-.word	0x002e	; .
-.word	0x0064	; d
-.word	0x0065	; e
-.word	0x030e  ; type 3 length 0e
-.word	0x0055	; U
-.word	0x0053	; S
-.word	0x0042	; B
-.word	0x0061	; a
-.word	0x0073	; s
-.word	0x0070	; p
-; DEVICE DESC
-.word	0x0112
-.word	0x0110
-.word	0x00ff
-.word	0x0800
-.word	0x16c0	; vid
-.word	0x05dc	; pid
-.word	0x0102	; bcdDevice
-.word	0x0201	; has string desc 1 and 2
-.word	0x0100	; has 1 config, no serial no
-; CONFIG DESC
-.word	0x0209	; type 2 length 9
-.word	0x0012
-.word	0x0101
-.word	0x8000
-.word	0x0932
-.word	0x0004
-nop
-nop
-nop
-
-
-.org 0x1F000
+.include "atmega1284pdef.inc"
 f800:	rjmp	RESET_ISR
 f802:	nop
 f804:	rjmp	NO_ISR
@@ -117,67 +7,67 @@ f808:	rjmp	NO_ISR
 f80a:	nop
 f80c:	rjmp	INT2_ISR
 f80e:	nop
-f810:	rjmp	NO_ISR
-f812:	nop
-f814:	rjmp	NO_ISR
-f816:	nop
-f818:	rjmp	NO_ISR
-f81a:	nop
-f81c:	rjmp	NO_ISR
-f81e:	nop
-f820:	rjmp	NO_ISR
-f822:	nop
-f824:	rjmp	NO_ISR
-f826:	nop
-f828:	rjmp	NO_ISR
-f82a:	nop
-f82c:	rjmp	NO_ISR
-f82e:	nop
-f830:	rjmp	NO_ISR
-f832:	nop
-f834:	rjmp	NO_ISR
-f836:	nop
-f838:	rjmp	NO_ISR
-f83a:	nop
-f83c:	rjmp	NO_ISR
-f83e:	nop
-f840:	rjmp	NO_ISR
-f842:	nop
-f844:	rjmp	NO_ISR
-f846:	nop
-f848:	rjmp	NO_ISR
-f84a:	nop
-f84c:	rjmp	NO_ISR
-f84e:	nop
-f850:	rjmp	NO_ISR
-f852:	nop
-f854:	rjmp	NO_ISR
-f856:	nop
-f858:	rjmp	NO_ISR
-f85a:	nop
-f85c:	rjmp	NO_ISR
-f85e:	nop
-f860:	rjmp	NO_ISR
-f862:	nop
-f864:	rjmp	NO_ISR
-f866:	nop
-f868:	rjmp	NO_ISR
-f86a:	nop
-f86c:	rjmp	NO_ISR
-f86e:	nop
-f870:	rjmp	NO_ISR
-f872:	nop
-f874:	rjmp	NO_ISR
-f876:	nop
-f878:	rjmp	NO_ISR
-f87a:	nop
+; f810:	rjmp	NO_ISR
+; f812:	nop
+; f814:	rjmp	NO_ISR
+; f816:	nop
+; f818:	rjmp	NO_ISR
+; f81a:	nop
+; f81c:	rjmp	NO_ISR
+; f81e:	nop
+; f820:	rjmp	NO_ISR
+; f822:	nop
+; f824:	rjmp	NO_ISR
+; f826:	nop
+; f828:	rjmp	NO_ISR
+; f82a:	nop
+; f82c:	rjmp	NO_ISR
+; f82e:	nop
+; f830:	rjmp	NO_ISR
+; f832:	nop
+; f834:	rjmp	NO_ISR
+; f836:	nop
+; f838:	rjmp	NO_ISR
+; f83a:	nop
+; f83c:	rjmp	NO_ISR
+; f83e:	nop
+; f840:	rjmp	NO_ISR
+; f842:	nop
+; f844:	rjmp	NO_ISR
+; f846:	nop
+; f848:	rjmp	NO_ISR
+; f84a:	nop
+; f84c:	rjmp	NO_ISR
+; f84e:	nop
+; f850:	rjmp	NO_ISR
+; f852:	nop
+; f854:	rjmp	NO_ISR
+; f856:	nop
+; f858:	rjmp	NO_ISR
+; f85a:	nop
+; f85c:	rjmp	NO_ISR
+; f85e:	nop
+; f860:	rjmp	NO_ISR
+; f862:	nop
+; f864:	rjmp	NO_ISR
+; f866:	nop
+; f868:	rjmp	NO_ISR
+; f86a:	nop
+; f86c:	rjmp	NO_ISR
+; f86e:	nop
+; f870:	rjmp	NO_ISR
+; f872:	nop
+; f874:	rjmp	NO_ISR
+; f876:	nop
+; f878:	rjmp	NO_ISR
+; f87a:	nop
 
-USB_DESC:
-f87c:	.word	0x0304	; type 03 legnth 4
+; 	USB_descriptor
+usbDesc_str0:	.word	0x0304	; type 03 legnth 4
 f87e:	.word	0x0409	; lang: eng
 
-f880:	.word	0x031c	; type 03 length 1c
-f882:	.word	0x0078	; w
+usbDesc_str1:	.word	0x031c	; type 03 length 1c
+f882:	.word	0x0077	; w
 f884:	.word	0x0077	; w
 f886:	.word	0x0077	; w
 f888:	.word	0x002e	; .
@@ -191,7 +81,7 @@ f896:	.word	0x002e	; .
 f898:	.word	0x0064	; d
 f89a:	.word	0x0065	; e
 
-f89c:	.word	0x030e  ; type 3 length 0e
+usbDesc_str2:	.word	0x030e  ; type 3 length 0e
 f89e:	.word	0x0055	; U
 f8a0:	.word	0x0053	; S
 f8a2:	.word	0x0042	; B
@@ -199,7 +89,7 @@ f8a4:	.word	0x0061	; a
 f8a6:	.word	0x0073	; s
 f8a8:	.word	0x0070	; p
 	; DEVICE DESC
-f8aa:	.word	0x0112
+usbDesc_dev:	.word	0x0112
 f8ac:	.word	0x0110
 f8ae:	.word	0x00ff
 f8b0:	.word	0x0800
@@ -209,28 +99,28 @@ f8b6:	.word	0x0102	; bcdDevice
 f8b8:	.word	0x0201	; has string desc 1 and 2
 f8ba:	.word	0x0100	; has 1 config, no serial no
 	; CONFIG DESC
-f8bc:	.word	0x0209	; type 2 length 9
+usbDesc_cfg:	.word	0x0209	; type 2 length 9
 f8be:	.word	0x0012
 f8c0:	.word	0x0101
 f8c2:	.word	0x8000
 f8c4:	.word	0x0932
 f8c6:	.word	0x0004
-f8c8:	nop
-f8ca:	nop
-f8cc:	nop
+f8c8:	.word	0x0000
+f8ca:	.word	0x0000
+f8cc:	.word	0x0000
 
 ; main entry point
 RESET_ISR:	eor	r1, r1
-	ldi	r24, 0xff
-	out	0x01, r24
-	out	0x02, r24
-	out	0x02, r1
+	; ldi	r24, 0xff
+	; out	0x01, r24
+	; out	0x02, r24
+	; out	0x02, r1
 
 
 f8da:	ldi	r17, 0x01	; 1
 	sts	0x3b, r24	
 	; in	r24, RAMPZ
-	out 	0x02, r24
+	; out 	0x02, r24
 
 f8d0:	out	0x3f, r1	; SREG = 0
 f8d2:	ldi	r28, 0xFF	; Y = 0x10FF
@@ -764,13 +654,13 @@ fd02:	movw	r30, r16
 fd04:	ldd	r24, Z+3	; 0x03
 fd06:	cpi	r24, 0x01	; 1
 fd08:	brne	fd10
-fd0a:	ldi	r24, 0xAA	; 170
-fd0c:	ldi	r25, 0xF8	; 248
+fd0a:	ldi	r24, lo8(usbDesc_dev)
+fd0c:	ldi	r25, hi8(usbDesc_dev)
 fd0e:	rjmp	fd18
 fd10:	cpi	r24, 0x02	; 2
 fd12:	brne	fd24
-fd14:	ldi	r24, 0xBC	; 188
-fd16:	ldi	r25, 0xF8	; 248
+fd14:	ldi	r24, lo8(usbDesc_cfg)
+fd16:	ldi	r25, hi8(usbDesc_cfg)
 fd18:	sts	0x011C, r25	; usbMsgPtr_H  0x80011c
 fd1c:	sts	0x011B, r24	; usbMsgPtr_L  0x80011b
 fd20:	ldi	r25, 0x12	; 18
@@ -782,24 +672,24 @@ fd2a:	adiw	r26, 0x02	; 2
 fd2c:	ld	r24, X
 fd2e:	and	r24, r24
 fd30:	brne	fd42
-fd32:	ldi	r24, 0x7C	; 124
-fd34:	ldi	r25, 0xF8	; 248
+fd32:	ldi	r24, lo8(usbDesc_str0)
+fd34:	ldi	r25, hi8(usbDesc_str0)
 fd36:	sts	0x011C, r25	; usbMsgPtr_H  0x80011c
 fd3a:	sts	0x011B, r24	; usbMsgPtr_L  0x80011b
 fd3e:	ldi	r25, 0x04	; 4
 fd40:	rjmp	msgPtr_is_ROM
 fd42:	cpi	r24, 0x01	; 1
 fd44:	brne	fd56
-fd46:	ldi	r24, 0x80	; 128
-fd48:	ldi	r25, 0xF8	; 248
+fd46:	ldi	r24, lo8(usbDesc_str1)
+fd48:	ldi	r25, hi8(usbDesc_str1)
 fd4a:	sts	0x011C, r25	; usbMsgPtr_H  0x80011c
 fd4e:	sts	0x011B, r24	; usbMsgPtr_L  0x80011b
 fd52:	ldi	r25, 0x1C	; 28
 fd54:	rjmp	msgPtr_is_ROM
 fd56:	cpi	r24, 0x02	; 2
 fd58:	brne	fd6a
-fd5a:	ldi	r24, 0x9C	; 156
-fd5c:	ldi	r25, 0xF8	; 248
+fd5a:	ldi	r24, lo8(usbDesc_str2)
+fd5c:	ldi	r25, hi8(usbDesc_str2)
 fd5e:	sts	0x011C, r25	; usbMsgPtr_H  0x80011c
 fd62:	sts	0x011B, r24	; usbMsgPtr_L  0x80011b
 fd66:	ldi	r25, 0x0E	; 14
@@ -834,6 +724,7 @@ fda4:	mov	r18, r25
 fda6:	ldi	r24, 0x80	; 128
 fda8:	sts	0x0106, r24	; usbMsgFlags  0x800106
 fdac:	rjmp	fdbe
+
 fdae:	movw	r30, r16
 fdb0:	ldd	r24, Z+7	; 0x07
 fdb2:	and	r24, r24

@@ -5,7 +5,7 @@ CC = avr-gcc
 # MMCU = atmega1284p
 MMCU = atmega644p
 
-recompiled.o: original_decompiled_labels.asm
+recompiled.o: original_decompiled_labels.asm clean
 	avr-as -mmcu=$(MMCU) original_decompiled_labels.asm -o recompiled.o
 
 recompiled.elf: recompiled.o
@@ -17,14 +17,14 @@ recompiled.hex: recompiled.elf
 assemble: recompiled.hex
 
 upload: recompiled.hex
-	avrdude -c um232h -p $(MMCU) -v -U flash:w:"C:\Users\alexl\projects\il-flatto\bootloader\re-linked\recompiled.hex":i 
+	avrdude -c um232h -p $(MMCU) -U flash:w:"C:\Users\alexl\projects\il-flatto\bootloader\re-linked\recompiled.hex":i 
 
 test: upload
 	sleep 1
-	avrdude -c usbasp -p m644p -v -U flash:w:"C:\Users\alexl\projects\il-flatto\bootloader\tests\blink\blink.hex":i 
+	avrdude -c usbasp -p m644p  -U flash:w:"C:\Users\alexl\projects\il-flatto\bootloader\tests\blink\blink.hex":i 
 
 disassemble:
 	avr-objdump  -m avr5 -D ORIGINAL_atmega644pa-12mhz_2048.hex > original_decompiled.dump
 
 clean:
-	rm recompiled.o recompiled.elf recompiled.hex
+	rm recompiled.o recompiled.elf recompiled.hex || true

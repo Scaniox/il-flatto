@@ -1,4 +1,5 @@
 .include "atmega1284pdef.inc"
+.include "ram_map.inc"
 f800:	rjmp	RESET_ISR
 f802:	nop
 f804:	rjmp	NO_ISR
@@ -97,11 +98,11 @@ f8b2:	.word	0x16c0	; vid
 f8b4:	.word	0x05dc	; pid
 f8b6:	.word	0x0102	; bcdDevice
 f8b8:	.word	0x0201	; has string desc 1 and 2
-f8ba:	.word	0x0100	; has 1 config, no serial no
+f8ba:	.word	usbTxLen	; has 1 config, no serial no
 	; CONFIG DESC
 usbDesc_cfg:	.word	0x0209	; type 2 length 9
 f8be:	.word	0x0012
-f8c0:	.word	0x0101
+f8c0:	.word	usbMsgLen
 f8c2:	.word	0x8000
 f8c4:	.word	0x0932
 f8c6:	.word	0x0004
@@ -128,8 +129,8 @@ f8d4:	ldi	r29, 0x10	;
 f8d6:	out	SPH, r29	; SP = 0x10FF
 f8d8:	out	SPL, r28	; 
 
-;	store 0xffa5 into ram 0x0101:0x0100
-f8dc:	ldi	r26, 0x00	; X = 0x0100
+;	store 0xffa5 into ram usbMsgLen:usbTxLen
+f8dc:	ldi	r26, 0x00	; X = usbTxLen
 f8de:	ldi	r27, 0x01	; 
 f8e0:	ldi	r30, 0xFE	; Z = 0xFFFE 
 f8e2:	ldi	r31, 0xFF	; 
@@ -341,7 +342,7 @@ fa66:	cpi	r16, 0xC3	; 195
 fa68:	breq	faa4
 fa6a:	cpi	r16, 0x4B	; 75
 fa6c:	breq	faa4
-fa6e:	lds	r18, 0x0118	; usbDeviceAddr  0x800118
+fa6e:	lds	r18, usbDeviceAddr	; usbDeviceAddr  0x800118
 fa72:	ldd	r17, Y+1	; 0x01
 fa74:	add	r17, r17
 fa76:	cpse	r17, r18
@@ -371,26 +372,26 @@ faa2:	reti
 faa4:	lds	r18, 0x011F	;  0x80011f
 faa8:	and	r18, r18
 faaa:	breq	fa8a
-faac:	lds	r17, 0x011D	; usbRxLen  0x80011d
+faac:	lds	r17, usbRxLen	; usbRxLen  0x80011d
 fab0:	and	r17, r17
 fab2:	brne	faf8
 fab4:	cpi	r19, 0x04	; 4
 fab6:	brmi	fafc
-fab8:	sts	0x011D, r19	; usbRxLen  0x80011d
-fabc:	sts	0x0119, r18	; usbRxToken  0x800119
+fab8:	sts	usbRxLen, r19	; usbRxLen  0x80011d
+fabc:	sts	usbRxToken, r18	; usbRxToken  0x800119
 fac0:	lds	r17, 0x011A	;  0x80011a
 fac4:	ldi	r19, 0x0B	; 11
 fac6:	sub	r19, r17
 fac8:	sts	0x011A, r19	;  0x80011a
 facc:	rjmp	fafc
-face:	lds	r16, 0x011D	; usbRxLen  0x80011d
+face:	lds	r16, usbRxLen	; usbRxLen  0x80011d
 fad2:	cpi	r16, 0x01	; 1
 fad4:	brge	faf8
 fad6:	ldi	r16, 0x5A	; 90
-fad8:	lds	r19, 0x0100	; usbTxLen  0x800100
+fad8:	lds	r19, usbTxLen	; usbTxLen  0x800100
 fadc:	sbrc	r19, 4
 fade:	rjmp	fb00
-fae0:	sts	0x0100, r16	; usbTxLen  0x800100
+fae0:	sts	usbTxLen, r16	; usbTxLen  0x800100
 fae4:	ldi	r28, 0x0D	; 13
 fae6:	ldi	r29, 0x01	; 1
 fae8:	rjmp	fb08
@@ -455,13 +456,13 @@ fb5c:	and	r19, r19
 fb5e:	out	PORTB, r16	; 5
 fb60:	brne	faea
 fb62:	andi	r16, 0xF3	; 243
-fb64:	lds	r17, 0x011E	; usbNewDeviceAddr  0x80011e
+fb64:	lds	r17, usbNewDeviceAddr	; usbNewDeviceAddr  0x80011e
 fb68:	add	r17, r17
 fb6a:	subi	r28, 0x16	; 22
 fb6c:	sbci	r29, 0x00	; 0
 fb6e:	out	PORTB, r16	; 5
 fb70:	breq	fb76
-fb72:	sts	0x0118, r17	; usbDeviceAddr  0x800118
+fb72:	sts	usbDeviceAddr, r17	; usbDeviceAddr  0x800118
 fb76:	ldi	r17, 0x04	; 4
 fb78:	out	EIFR, r17	; 28
 fb7a:	ori	r16, 0x08	; 8
@@ -517,7 +518,7 @@ fbd8:	sbi	PORTB, 7	; PORTB7 = 1
 fbda:	eor	r12, r12
 fbdc:	eor	r13, r13
 
-MAIN_LOOP:	lds	r25, 0x011D	; usbRxLen  0x80011d
+MAIN_LOOP:	lds	r25, usbRxLen	; usbRxLen  0x80011d
 	sbi	PORTB, 7	
 	cbi	PORTB, 7	
 fbe2:	subi	r25, 0x03	; 3
@@ -532,7 +533,7 @@ fbf0:	sub	r16, r24
 fbf2:	sbc	r17, r1
 fbf4:	subi	r16, 0xDF	; 223
 fbf6:	sbci	r17, 0xFE	; 254
-fbf8:	lds	r24, 0x0119	; usbRxToken == USBPID_SETUP 
+fbf8:	lds	r24, usbRxToken	; usbRxToken == USBPID_SETUP 
 fbfc:	cpi	r24, 0x2D	
 fbfe:	breq	USBPID_SETUP
 fc00:	rjmp	USBPID_OUT
@@ -543,8 +544,8 @@ fc06:	rjmp	exitProcesRX
 fc08:	ldi	r24, 0xC3	
 fc0a:	sts	0x010D, r24	; usbTxBuf[0] = USBPID_DATA0
 fc0e:	ldi	r24, 0x5A	
-fc10:	sts	0x0100, r24	; usbTxLen = USBPID_NAK
-fc14:	sts	0x0106, r1	; usbMsgFlags = 0
+fc10:	sts	usbTxLen, r24	; usbTxLen = USBPID_NAK
+fc14:	sts	usbMsgFlags, r1	; usbMsgFlags = 0
 fc18:	movw	r26, r16
 fc1a:	ld	r19, X
 fc1c:	mov	r24, r19	; load RAM[r16] to r24
@@ -557,8 +558,8 @@ fc28:	rjmp	usbDrvrSetup
 
 usbFuncSetup:	ldi	r24, 0x02	; 2
 fc2c:	ldi	r25, 0x01	; 1
-fc2e:	sts	0x011C, r25	; usbMsgPtr_H  0x80011c
-fc32:	sts	0x011B, r24	; usbMsgPtr_L  0x80011b
+fc2e:	sts	usbMsgPtr_H, r25	; usbMsgPtr_H  0x80011c
+fc32:	sts	usbMsgPtr_L, r24	; usbMsgPtr_L  0x80011b
 fc36:	cpi	r18, 0x03	; 3
 fc38:	brne	fc90
 fc3a:	cli
@@ -646,7 +647,7 @@ fcf0:	ldi	r25, 0x02	; 2
 fcf2:	rjmp	fd9a
 fcf4:	cpi	r18, 0x05	; 5
 fcf6:	brne	fcfe
-fcf8:	sts	0x011E, r24	; usbNewDeviceAddr = value
+fcf8:	sts	usbNewDeviceAddr, r24	; usbNewDeviceAddr = value
 fcfc:	rjmp	fd94
 fcfe:	cpi	r18, 0x06	; 6
 fd00:	brne	fd74
@@ -661,8 +662,8 @@ fd10:	cpi	r24, 0x02	; 2
 fd12:	brne	fd24
 fd14:	ldi	r24, lo8(usbDesc_cfg)
 fd16:	ldi	r25, hi8(usbDesc_cfg)
-fd18:	sts	0x011C, r25	; usbMsgPtr_H  0x80011c
-fd1c:	sts	0x011B, r24	; usbMsgPtr_L  0x80011b
+fd18:	sts	usbMsgPtr_H, r25	; usbMsgPtr_H  0x80011c
+fd1c:	sts	usbMsgPtr_L, r24	; usbMsgPtr_L  0x80011b
 fd20:	ldi	r25, 0x12	; 18
 fd22:	rjmp	msgPtr_is_ROM
 fd24:	cpi	r24, 0x03	; 3
@@ -674,29 +675,29 @@ fd2e:	and	r24, r24
 fd30:	brne	fd42
 fd32:	ldi	r24, lo8(usbDesc_str0)
 fd34:	ldi	r25, hi8(usbDesc_str0)
-fd36:	sts	0x011C, r25	; usbMsgPtr_H  0x80011c
-fd3a:	sts	0x011B, r24	; usbMsgPtr_L  0x80011b
+fd36:	sts	usbMsgPtr_H, r25	; usbMsgPtr_H  0x80011c
+fd3a:	sts	usbMsgPtr_L, r24	; usbMsgPtr_L  0x80011b
 fd3e:	ldi	r25, 0x04	; 4
 fd40:	rjmp	msgPtr_is_ROM
 fd42:	cpi	r24, 0x01	; 1
 fd44:	brne	fd56
 fd46:	ldi	r24, lo8(usbDesc_str1)
 fd48:	ldi	r25, hi8(usbDesc_str1)
-fd4a:	sts	0x011C, r25	; usbMsgPtr_H  0x80011c
-fd4e:	sts	0x011B, r24	; usbMsgPtr_L  0x80011b
+fd4a:	sts	usbMsgPtr_H, r25	; usbMsgPtr_H  0x80011c
+fd4e:	sts	usbMsgPtr_L, r24	; usbMsgPtr_L  0x80011b
 fd52:	ldi	r25, 0x1C	; 28
 fd54:	rjmp	msgPtr_is_ROM
 fd56:	cpi	r24, 0x02	; 2
 fd58:	brne	fd6a
 fd5a:	ldi	r24, lo8(usbDesc_str2)
 fd5c:	ldi	r25, hi8(usbDesc_str2)
-fd5e:	sts	0x011C, r25	; usbMsgPtr_H  0x80011c
-fd62:	sts	0x011B, r24	; usbMsgPtr_L  0x80011b
+fd5e:	sts	usbMsgPtr_H, r25	; usbMsgPtr_H  0x80011c
+fd62:	sts	usbMsgPtr_L, r24	; usbMsgPtr_L  0x80011b
 fd66:	ldi	r25, 0x0E	; 14
 fd68:	rjmp	msgPtr_is_ROM
 fd6a:	ldi	r25, 0x00	; 0
 msgPtr_is_ROM:	ldi	r24, 0x40	; 64
-fd6e:	sts	0x0106, r24	; usbMsgFlags  = USB_FLG_MSGPTR_IS_ROM
+fd6e:	sts	usbMsgFlags, r24	; usbMsgFlags  = USB_FLG_MSGPTR_IS_ROM
 fd72:	rjmp	fdae
 
 fd74:	cpi	r18, 0x08	; 8
@@ -717,12 +718,12 @@ fd92:	rjmp	fd9a
 fd94:	ldi	r18, 0x16	; 22
 fd96:	ldi	r19, 0x01	; 1
 fd98:	ldi	r25, 0x00	; 0
-fd9a:	sts	0x011C, r19	; usbMsgPtr_H  0x80011c
-fd9e:	sts	0x011B, r18	; usbMsgPtr_L  0x80011b
+fd9a:	sts	usbMsgPtr_H, r19	; usbMsgPtr_H  0x80011c
+fd9e:	sts	usbMsgPtr_L, r18	; usbMsgPtr_L  0x80011b
 fda2:	rjmp	fdae
 fda4:	mov	r18, r25
 fda6:	ldi	r24, 0x80	; 128
-fda8:	sts	0x0106, r24	; usbMsgFlags  0x800106
+fda8:	sts	usbMsgFlags, r24	; usbMsgFlags  0x800106
 fdac:	rjmp	fdbe
 
 fdae:	movw	r30, r16
@@ -733,10 +734,10 @@ fdb6:	ldd	r18, Z+6	; 0x06
 fdb8:	cp	r18, r25
 fdba:	brcs	fdbe
 fdbc:	mov	r18, r25
-fdbe:	sts	0x0101, r18	; usbMsgLen  0x800101
+fdbe:	sts	usbMsgLen, r18	; usbMsgLen  0x800101
 fdc2:	rjmp	exitProcesRX
 
-USBPID_OUT:	lds	r24, 0x0106	; usbMsgFlags  0x800106
+USBPID_OUT:	lds	r24, usbMsgFlags	; usbMsgFlags  0x800106
 fdc8:	sbrs	r24, 7
 fdca:	rjmp	exitProcesRX
 fdcc:	lds	r24, 0x010A	;  0x80010a
@@ -826,15 +827,15 @@ fe92:	brcc	fe96
 fe94:	rjmp	fe1a
 fe96:	and	r14, r14
 fe98:	breq	exitProcesRX
-fe9a:	sts	0x0101, r1	; usbMsgLen  0x800101
+fe9a:	sts	usbMsgLen, r1	; usbMsgLen  0x800101
 ; 	end of usbProcessRx
 
-exitProcesRX:	sts	0x011D, r1	; usbRxLen = 0
+exitProcesRX:	sts	usbRxLen, r1	; usbRxLen = 0
 
-skip_rx:	lds	r24, 0x0100	; usbTxLen  0x800100
+skip_rx:	lds	r24, usbTxLen	; usbTxLen  0x800100
 fea6:	sbrs	r24, 4
 fea8:	rjmp	waitForSE0
-feaa:	lds	r24, 0x0101	; usbMsgLen  0x800101
+feaa:	lds	r24, usbMsgLen	; usbMsgLen  0x800101
 feae:	cpi	r24, 0xFF	; 255
 feb0:	brne	usbBuildTx
 feb2:	rjmp	waitForSE0
@@ -845,7 +846,7 @@ feb6:	cpi	r24, 0x09	; 9
 feb8:	brcs	febc
 feba:	ldi	r17, 0x08	; 8
 febc:	sub	r24, r17
-febe:	sts	0x0101, r24	; usbMsgLen  0x800101
+febe:	sts	usbMsgLen, r24	; usbMsgLen  0x800101
 fec2:	lds	r24, 0x010D	; usbTxBuf[0]  0x80010d
 fec6:	ldi	r25, 0x88	; 136
 fec8:	eor	r24, r25
@@ -853,7 +854,7 @@ feca:	sts	0x010D, r24	; usbTxBuf[0]  0x80010d
 fece:	and	r17, r17
 fed0:	brne	fed4
 fed2:	rjmp	ff68
-fed4:	lds	r24, 0x0106	; usbMsgFlags  0x800106
+fed4:	lds	r24, usbMsgFlags	; usbMsgFlags  0x800106
 fed8:	sbrs	r24, 7
 feda:	rjmp	ff30
 fedc:	lds	r24, 0x010A	;  0x80010a
@@ -889,8 +890,8 @@ ff28:	cp	r28, r24
 ff2a:	cpc	r29, r25
 ff2c:	brne	fef2
 ff2e:	rjmp	ff64
-ff30:	lds	r30, 0x011B	; usbMsgPtr_L  0x80011b
-ff34:	lds	r31, 0x011C	; usbMsgPtr_H  0x80011c
+ff30:	lds	r30, usbMsgPtr_L	; usbMsgPtr_L  0x80011b
+ff34:	lds	r31, usbMsgPtr_H	; usbMsgPtr_H  0x80011c
 ff38:	sbrs	r24, 6
 ff3a:	rjmp	ff4e
 ff3c:	mov	r25, r17
@@ -909,8 +910,8 @@ ff54:	ld	r24, Z+
 ff56:	st	X+, r24
 ff58:	subi	r25, 0x01	; 1
 ff5a:	brne	ff54
-ff5c:	sts	0x011C, r31	; usbMsgPtr_H  0x80011c
-ff60:	sts	0x011B, r30	; usbMsgPtr_L  0x80011b
+ff5c:	sts	usbMsgPtr_H, r31	; usbMsgPtr_H  0x80011c
+ff60:	sts	usbMsgPtr_L, r30	; usbMsgPtr_L  0x80011b
 ff64:	cpi	r17, 0x09	; 9
 ff66:	brcc	ff80
 ff68:	ldi	r24, 0x0E	; 14
@@ -922,12 +923,12 @@ ff72:	subi	r22, 0xFC	; 252
 ff74:	cpi	r22, 0x0C	; 12
 ff76:	breq	ff88
 ff78:	ldi	r24, 0xFF	; 255
-ff7a:	sts	0x0101, r24	; usbMsgLen  0x800101
+ff7a:	sts	usbMsgLen, r24	; usbMsgLen  0x800101
 ff7e:	rjmp	ff88
 ff80:	ldi	r24, 0xFF	; 255
-ff82:	sts	0x0101, r24	; usbMsgLen  0x800101
+ff82:	sts	usbMsgLen, r24	; usbMsgLen  0x800101
 ff86:	ldi	r22, 0x1E	; 30
-ff88:	sts	0x0100, r22	; usbTxLen  0x800100
+ff88:	sts	usbTxLen, r22	; usbTxLen  0x800100
 
 
 waitForSE0:	ldi	r25, 0x14	; wait for SE0 to end (End of packet)
@@ -937,8 +938,8 @@ ff92:	brne	ffa0
 ff94:	subi	r25, 0x01	; 1
 ff96:	brne	ff8e 	; SE0 has ended
 
-ff98:	sts	0x011E, r1	; usbNewDeviceAddr  0x80011e
-ff9c:	sts	0x0118, r1	; usbDeviceAddr  0x800118
+ff98:	sts	usbNewDeviceAddr, r1	; usbNewDeviceAddr  0x80011e
+ff9c:	sts	usbDeviceAddr, r1	; usbDeviceAddr  0x800118
 
 ffa0:	lds	r24, 0x0107	;  0x800107
 ffa4:	and	r24, r24

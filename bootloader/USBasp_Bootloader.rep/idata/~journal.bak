@@ -1,3 +1,6 @@
-IADD:0000000c:/dissassembled.s
-IDSET:/dissassembled.s:c0a8381a46244215278021300
-IDEL:/dissassembled.s
+IDEL:/recompiled.elf
+IADD:00000010:/recompiled.elf
+IDSET:/recompiled.elf:c0a83814a5112324419687800
+IDEL:/recompiled.elf
+IADD:00000011:/recompiled.elf
+IDSET:/recompiled.elf:c0a83814a5a12421368106300

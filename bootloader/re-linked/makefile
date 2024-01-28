@@ -1,13 +1,23 @@
+# RE-LINKED MAKEFILE
 
 CC = avr-gcc
+ASSEMBLER = "C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avrassembler\avrasm2.exe"
 
-# MMCU = atmega1284p
-MMCU = atmega644p
+MMCU = atmega1284p
+# MMCU = atmega644p
 
-assemble:
+recompiled.o: original_decompiled_labels.asm
 	avr-as -mmcu=$(MMCU) original_decompiled_labels.asm -o recompiled.o
+
+recompiled.elf: recompiled.o
 	avr-ld recompiled.o -T link_$(MMCU).ld -o recompiled.elf -mavr51
+
+recompiled.hex: recompiled.elf
 	avr-objcopy -O ihex recompiled.elf recompiled.hex
+
+assemble: recompiled.hex
+
+upload: recompiled.hex
 	avrdude -c um232h -p $(MMCU) -v -U flash:w:"C:\Users\alexl\projects\il-flatto\bootloader\re-linked\recompiled.hex":i 
 
 disassemble:

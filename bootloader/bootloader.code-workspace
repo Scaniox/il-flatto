@@ -25,6 +25,9 @@
 				"source": "Git Bash",
 			}
 		},
-		"editor.tabSize": 8
+		"editor.tabSize": 4,
+		"[avr]": {
+			"editor.tabSize": 15
+		}
 	}
 }

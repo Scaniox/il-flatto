@@ -1,0 +1,4 @@
+
+bootloader/re-linked/build/recompiled.elf
+bootloader/re-linked/build/recompiled.hex
+bootloader/re-linked/build/recompiled.o

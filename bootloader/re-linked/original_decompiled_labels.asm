@@ -112,16 +112,19 @@ f8cc:	.word	0x0000
 
 ; main entry point
 RESET_ISR:	eor	r1, r1
-	; ldi	r24, 0xff
-	; out	0x01, r24
-	; out	0x02, r24
-	; out	0x02, r1
-
-
 f8da:	ldi	r17, 0x01	; 1
-	sts	0x3b, r24	
-	; in	r24, RAMPZ
-	; out 	0x02, r24
+	ldi	r24, 0xff
+	out	DDRA, r24
+	
+	ldi	r30, lo8(usbDesc_str0)
+	ldi	r31, hi8(usbDesc_str0)
+	adiw	r30, 0x00
+	ldi	r23, hh8(usbDesc_str0)
+	out	RAMPZ, r23
+	elpm	r24, Z
+	out	PORTA, r24
+	out	PORTA, r1
+
 
 f8d0:	out	SREG, r1	; SREG = 0
 f8d2:	ldi	r28, 0xFF	; Y = 0x10FF
@@ -135,7 +138,8 @@ f8de:	ldi	r27, 0x01	;
 f8e0:	ldi	r30, 0xFE	; Z = 0xFFFE 
 f8e2:	ldi	r31, 0xFF	; 
 f8e4:	rjmp	f8ea
-f8e6:	lpm	r0, Z+
+	out	RAMPZ, r23
+f8e6:	elpm	r0, Z+
 f8e8:	st	X+, r0		; 
 f8ea:	cpi	r26, 0x02	; X == 0x0102
 f8ec:	cpc	r27, r17
@@ -576,7 +580,8 @@ fc4e:	andi	r30, 0x06	; 6
 fc50:	ldi	r31, 0x00	; 0
 fc52:	ldi	r24, 0x21	; 33
 fc54:	sts	0x0057, r24	;  0x800057
-fc58:	lpm	r30, Z
+	out	RAMPZ, r23
+fc58:	elpm	r30, Z
 fc5a:	rjmp	fc86
 fc5c:	cpi	r30, 0x50	; 80
 fc5e:	breq	fc68
@@ -597,7 +602,8 @@ fc7a:	or	r30, r24
 fc7c:	ldi	r31, 0x00	; 0
 fc7e:	ldi	r24, 0x09	; 9
 fc80:	sts	0x0057, r24	;  0x800057
-fc84:	lpm	r30, Z
+	out	RAMPZ, r23
+fc84:	elpm	r30, Z
 fc86:	sei
 fc88:	sts	0x0105, r30	;  0x800105
 fc8c:	ldi	r25, 0x04	; 4
@@ -874,7 +880,8 @@ ff00:	brcs	ff08
 ff02:	movw	r24, r30
 ff04:	rcall	ffce
 ff06:	rjmp	ff0a
-ff08:	lpm	r24, Z
+	out	RAMPZ, r23
+ff08:	elpm	r24, Z
 ff0a:	st	Y, r24
 ff0c:	adiw	r28, 0x01	; 1
 ff0e:	lds	r24, 0x0108	;  0x800108
@@ -897,7 +904,8 @@ ff3a:	rjmp	ff4e
 ff3c:	mov	r25, r17
 ff3e:	ldi	r26, 0x0E	; 14
 ff40:	ldi	r27, 0x01	; 1
-ff42:	lpm	r24, Z
+	out	RAMPZ, r23
+ff42:	elpm	r24, Z
 ff44:	st	X+, r24
 ff46:	adiw	r30, 0x01	; 1
 ff48:	subi	r25, 0x01	; 1

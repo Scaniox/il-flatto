@@ -785,6 +785,7 @@ fe24:	brne	fe38
 fe26:	cli
 fe28:	ldi	r24, 0x03	; 3
 fe2a:	sts	0x0057, r24	;  0x800057
+	out	RAMPZ, r1
 fe2e:	spm
 fe30:	sei
 fe32:	in	r0, SPMCSR	; 55
@@ -799,6 +800,7 @@ fe42:	movw	r16, r26
 fe44:	ldi	r18, 0x01	; 1
 fe46:	movw	r0, r24
 fe48:	sts	0x0057, r18	;  0x800057
+	out	RAMPZ, r1
 fe4c:	spm
 fe4e:	eor	r1, r1
 fe50:	sei
@@ -818,6 +820,7 @@ fe70:	breq	fe90
 fe72:	cli
 fe74:	ldi	r24, 0x05	; 5
 fe76:	sts	0x0057, r24	;  0x800057
+	out	RAMPZ, r1
 fe7a:	spm
 fe7c:	sei
 fe7e:	in	r0, SPMCSR	; 55
@@ -826,6 +829,7 @@ fe82:	rjmp	fe7e
 fe84:	cli
 fe86:	ldi	r24, 0x11	; 17
 fe88:	sts	0x0057, r24	;  0x800057
+	out	RAMPZ, r1
 fe8c:	spm
 fe8e:	sei
 fe90:	cp	r19, r15

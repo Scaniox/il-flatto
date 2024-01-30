@@ -8,7 +8,7 @@ output.hex: $(name).elf
 	avr-objcopy -O ihex $(name).elf $(name).hex
 
 
-$(name).elf:
+$(name).elf: $(name).c
 	$(CC) $(FLAGS) $(name).c -o $(name).elf
 
 clean:

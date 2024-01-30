@@ -1,4 +1,4 @@
-.include "atmega1284pdef.inc"
+.include "part_defs/atmega1284pdef.inc"
 .include "ram_map.inc"
 f800:	rjmp	RESET_ISR
 f802:	nop

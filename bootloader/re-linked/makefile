@@ -9,7 +9,7 @@ build\recompiled.o: original_decompiled_labels.asm clean
 	avr-as -mmcu=$(MMCU) original_decompiled_labels.asm -o build\recompiled.o
 
 build\recompiled.elf: build\recompiled.o
-	avr-ld build\recompiled.o -T link_$(MMCU).ld -o build\recompiled.elf -mavr51
+	avr-ld build\recompiled.o -T linkerscripts\link_$(MMCU).ld -o build\recompiled.elf -mavr51
 
 build\recompiled.hex: build\recompiled.elf
 	avr-objcopy -O ihex build\recompiled.elf build\recompiled.hex
